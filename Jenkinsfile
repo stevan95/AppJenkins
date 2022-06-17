@@ -12,10 +12,7 @@ pipeline {
    stages {
       stage('Build') {
         steps {
-           sh 'whoami'
-           script {
-             build()
-           }
+           sh 'docker build -t ${BRANCH_NAME}:${COMMIT} .'
         }
       }
    }
