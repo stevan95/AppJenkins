@@ -19,11 +19,12 @@ pipeline {
                sh '''
                docker run --name $APP_NAME -d $IMAGE
                
-               if [ ! "$(docker ps -q -f name=<name>)" ]; then
+               if [ ! "$(docker ps -q -f name=$APP_NAME)" ]; then
                   echo "Container is running successfuly"
                else
                   echo "Failed to run container in background"
                fi
+               
                '''
                sh 'docker rm -f $STATUS'
             }
