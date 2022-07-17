@@ -16,8 +16,10 @@ pipeline {
       stage('Test') {
          steps {
             script {
-               sh 'docker run -d $IMAGE'
-               STATUS= sh( script: "docker ps | grep mongo | awk ' { print $1 } '", returnStdout: true).trim()
+               sh '''
+                  docker run -d $IMAGE
+                  STATUS=`docker ps | grep mongo | awk ' { print $1 } '`   
+               '''
 
                if [-z "$STATUS"]; then
                      echo "Test is failed."
