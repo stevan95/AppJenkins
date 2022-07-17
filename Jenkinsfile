@@ -16,14 +16,15 @@ pipeline {
       stage('Test') {
          steps {
             script {
-               sh 'docker run --name $APP_NAME -d $IMAGE'
-
-               if ("$(docker ps -q -f name=$APP_NAME)") {
+               sh '''
+               docker run --name $APP_NAME -d $IMAGE
+               
+               if [ ! "$(docker ps -q -f name=<name>)" ]; then
                   echo "Container is running successfuly"
-               } else {
-                  echo "Failed to run container in background."
-               }
-
+               else
+                  echo "Failed to run container in background"
+               fi
+               '''
                sh 'docker rm -f $STATUS'
             }
          }
