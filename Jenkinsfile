@@ -24,6 +24,8 @@ pipeline {
                   else
                      echo "Test is successful."
                   fi
+
+                  docker rm -f $STATUS
                '''
             }
          }
