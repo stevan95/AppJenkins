@@ -16,15 +16,12 @@ pipeline {
       stage('Test') {
          steps {
             script {
-               sh '''
-                  docker run -d $IMAGE
-                  STATUS=`docker ps | grep mongo | awk ' { print $1 } '`   
-               '''
+               sh 'docker run --name $APP_NAME -d $IMAGE'
 
-               if [[-z "$STATUS"]]; then
-                     echo "Test is failed."
+               if [ ! "$(docker ps -q -f name=$APP_NAME)" ]; then
+                  echo "Container is running successfuly"
                else
-                     echo "Test is successful."
+                  echo "Failed to run container in background."
                fi
 
                sh 'docker rm -f $STATUS'
