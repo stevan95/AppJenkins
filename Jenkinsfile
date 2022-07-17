@@ -21,7 +21,7 @@ pipeline {
                   STATUS=`docker ps | grep mongo | awk ' { print $1 } '`   
                '''
 
-               if [-z "$STATUS"]; then
+               if [[-z "$STATUS"]]; then
                      echo "Test is failed."
                else
                      echo "Test is successful."
