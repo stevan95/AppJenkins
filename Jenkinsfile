@@ -16,7 +16,7 @@ pipeline {
       stage('Test') {
          steps {
             script {
-               
+
                sh '''
                docker run --name $APP_NAME -d $IMAGE
                
@@ -27,7 +27,7 @@ pipeline {
                fi
 
                '''
-               sh 'docker rm -f $STATUS'
+               sh 'docker rm -f $APP_NAME'
             }
          }
       }
