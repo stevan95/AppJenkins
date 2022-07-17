@@ -16,6 +16,7 @@ pipeline {
       stage('Test') {
          steps {
             script {
+               
                sh '''
                docker run --name $APP_NAME -d $IMAGE
                
@@ -24,7 +25,7 @@ pipeline {
                else
                   echo "Failed to run container in background"
                fi
-               
+
                '''
                sh 'docker rm -f $STATUS'
             }
