@@ -24,6 +24,7 @@ pipeline {
                   echo "Container is running successfuly"
                else
                   echo "Failed to run container in background"
+                  exit 1
                fi
 
                '''
