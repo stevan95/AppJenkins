@@ -12,5 +12,21 @@ pipeline {
            sh 'docker build -t $IMAGE .'
         }
       }
+
+      stage('Test') {
+         steps {
+            script {
+               sh '''
+                  docker run -d $IMAGE
+                  STATUS=`docker ps | grep mongo | awk ' { print $1 } '`
+                  if [-z "$STATUS"];
+                     echo "Test is failed."
+                  else
+                     echo "Test is successful."
+                  fi
+               '''
+            }
+         }
+      }
    }
 }
