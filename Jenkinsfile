@@ -35,9 +35,11 @@ pipeline {
       }
 
       stage ('Push') {
-         sh 'docker tag $IMAGE mstiv95/$IMAGE'
-         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-            sh 'docker push mstiv95/$IMAGE'
+         steps {
+            sh 'docker tag $IMAGE mstiv95/$IMAGE'
+            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+               sh 'docker push mstiv95/$IMAGE'
+            }
          }
       }
    }
